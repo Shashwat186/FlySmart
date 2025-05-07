@@ -1,0 +1,97 @@
+:root {
+    --color-light: #F5EEDC;
+    --color-primary: #27548A;
+    --color-dark: #183B4E;
+    --color-accent: #DDA853;
+    --glass-bg: rgba(39, 84, 138, 0.15);
+    --glass-border: 1px solid rgba(221, 168, 83, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --glass-blur: blur(12px);
+    --glass-radius: 16px;
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--color-light);
+    background: linear-gradient(rgba(24, 59, 78, 0.9), rgba(39, 84, 138, 0.9)),
+                url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-1.2.1&auto=format&fit=crop&w=3840&q=80');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    min-height: 100vh;
+ padding-top: 60px;
+}
+
+.form-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    border-radius: var(--glass-radius);
+    box-shadow: var(--glass-shadow);
+}
+
+.form-label {
+    color: var(--color-light);
+    font-weight: 500;
+}
+
+.form-control, .form-select {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: var(--glass-border);
+    color: var(--color-light);
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-color: var(--color-accent);
+    color: var(--color-light);
+    box-shadow: 0 0 0 0.25rem rgba(221, 168, 83, 0.25);
+}
+
+.btn-primary {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-dark);
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--color-light);
+}
+
+.btn-primary:hover {
+    background-color: #c99b4a;
+    border-color: #c99b4a;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+h2 {
+    color: var(--color-light);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.error-message {
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 1.5rem;
+        margin: 1.5rem;
+    }
+}

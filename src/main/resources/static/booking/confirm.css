@@ -1,0 +1,116 @@
+:root {
+    --color-light: #F5EEDC;
+    --color-primary: #27548A;
+    --color-dark: #183B4E;
+    --color-accent: #DDA853;
+    --glass-bg: rgba(39, 84, 138, 0.15);
+    --glass-border: 1px solid rgba(221, 168, 83, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --glass-blur: blur(12px);
+    --glass-radius: 16px;
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--color-light);
+    background: linear-gradient(rgba(24, 59, 78, 0.9), rgba(39, 84, 138, 0.9)),
+                url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-1.2.1&auto=format&fit=crop&w=3840&q=80');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.confirmation-container {
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    border-radius: var(--glass-radius);
+    box-shadow: var(--glass-shadow);
+    padding: 2rem;
+}
+
+h1, h2 {
+    color: var(--color-light);
+    font-weight: 500;
+}
+
+p, li {
+    color: var(--color-light);
+    margin-bottom: 0.5rem;
+}
+
+.section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(245, 238, 220, 0.2);
+}
+
+.section:last-child {
+    border-bottom: none;
+}
+
+.list-unstyled li {
+    padding: 0.5rem 0;
+}
+
+.thank-you {
+    text-align: center;
+    font-size: 1.1rem;
+    margin: 1.5rem 0;
+}
+
+.thank-you i {
+    color: var(--color-accent);
+}
+
+.btn-primary {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-dark);
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--color-light);
+}
+
+.btn-primary:hover {
+    background-color: #c99b4a;
+    border-color: #c99b4a;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .confirmation-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    /* Add this to your existing confirm.css */
+
+}
+.btn-secondary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-light);
+}
+ 
+.btn-secondary:hover {
+    background-color: #1c446f;
+    border-color: #1c446f;
+}
