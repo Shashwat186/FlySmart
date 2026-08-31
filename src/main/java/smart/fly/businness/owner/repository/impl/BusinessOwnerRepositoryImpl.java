@@ -26,7 +26,7 @@ public class BusinessOwnerRepositoryImpl implements BusinessOwnerRepository {
 
 	@Override
 	public BusinessOwner findById(int boId) {
-		String sql = "SELECT * FROM BusinessOwner WHERE bo_id = ?";
+		String sql = "SELECT * FROM business_owner WHERE bo_id = ?";
 		return jdbcTemplate.queryForObject(sql, new BusinessOwnerRowMapper(), boId);
 	}
 
@@ -38,31 +38,31 @@ public class BusinessOwnerRepositoryImpl implements BusinessOwnerRepository {
 
 	@Override
 	public List<BusinessOwner> findAll() {
-		String sql = "SELECT * FROM BusinessOwner";
+		String sql = "SELECT * FROM business_owner";
 		return jdbcTemplate.query(sql, new BusinessOwnerRowMapper());
 	}
 
 	@Override
 	public void save(BusinessOwner businessOwner) {
-		String sql = "INSERT INTO BusinessOwner (user_id) VALUES (?)";
+		String sql = "INSERT INTO business_owner (user_id) VALUES (?)";
 		jdbcTemplate.update(sql, businessOwner.getUser().getUserId());
 	}
 
 	@Override
 	public void addFlightManager(int boId, int fmId) {
-		String sql = "UPDATE FlightManager SET bo_id = ? WHERE fm_id = ?";
+		String sql = "UPDATE flight_manager SET bo_id = ? WHERE fm_id = ?";
 		jdbcTemplate.update(sql, boId, fmId);
 	}
 
 	@Override
 	public List<Integer> getManagedFlightManagerIds(int boId) {
-		String sql = "SELECT fm_id FROM FlightManager WHERE bo_id = ?";
+		String sql = "SELECT fm_id FROM flight_manager WHERE bo_id = ?";
 		return jdbcTemplate.queryForList(sql, Integer.class, boId);
 	}
 
 	@Override
 	public int getFlightCount(int boId) {
-		String sql = "SELECT COUNT(*) FROM Flight f JOIN FlightManager fm ON f.fm_id = fm.fm_id WHERE fm.bo_id = ?";
+		String sql = "SELECT COUNT(*) FROM flight f JOIN flight_manager fm ON f.fm_id = fm.fm_id WHERE fm.bo_id = ?";
 		return jdbcTemplate.queryForObject(sql, Integer.class, boId);
 	}
 

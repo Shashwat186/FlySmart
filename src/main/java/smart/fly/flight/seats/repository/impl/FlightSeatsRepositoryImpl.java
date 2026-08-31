@@ -27,25 +27,25 @@ public class FlightSeatsRepositoryImpl implements FlightSeatsRepository {
 
 	@Override
 	public FlightSeats findByFlightAndClass(int flightId, int seatClassId) {
-		String sql = "SELECT * FROM Flight_Seats WHERE flight_id = ? AND seat_class_id = ?";
+		String sql = "SELECT * FROM flight_seats WHERE flight_id = ? AND seat_class_id = ?";
 		return jdbcTemplate.queryForObject(sql, new FlightSeatsRowMapper(), flightId, seatClassId);
 	}
 
 	@Override
 	public List<FlightSeats> findByFlight(int flightId) {
-		String sql = "SELECT * FROM Flight_Seats WHERE flight_id = ?";
+		String sql = "SELECT * FROM flight_seats WHERE flight_id = ?";
 		return jdbcTemplate.query(sql, new FlightSeatsRowMapper(), flightId);
 	}
 
 	@Override
 	public void updateAvailableSeats(int flightSeatId, int newAvailableSeats) {
-		String sql = "UPDATE Flight_Seats SET available_seats = ? WHERE flight_seat_id = ?";
+		String sql = "UPDATE flight_seats SET available_seats = ? WHERE flight_seat_id = ?";
 		jdbcTemplate.update(sql, newAvailableSeats, flightSeatId);
 	}
 
 	@Override
 	public void save(FlightSeats flightSeats) {
-		String sql = "INSERT INTO flight_Seats (Flight_id, Seat_Class_id, Available_seats, Total_seats, Price) "
+		String sql = "INSERT INTO flight_seats (Flight_id, Seat_Class_id, Available_seats, Total_seats, Price) "
 				+ "VALUES (?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, flightSeats.getFlight().getFlightId(), flightSeats.getSeatClass().getSeatClassId(),
 				flightSeats.getAvailableSeats(), flightSeats.getTotalSeats(), flightSeats.getPrice());
@@ -75,7 +75,7 @@ public class FlightSeatsRepositoryImpl implements FlightSeatsRepository {
 
 	@Override
 	public FlightSeats findByid(int id) {
-		String sql = "SELECT * FROM flight_Seats WHERE flight_seat_id = ?";
+		String sql = "SELECT * FROM flight_seats WHERE flight_seat_id = ?";
 		return jdbcTemplate.queryForObject(sql, new FlightSeatsRowMapper(), id);
 	}
 

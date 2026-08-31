@@ -25,25 +25,25 @@ public class SeatClassRepositoryImpl implements SeatClassRepository {
 
 	@Override
 	public SeatClass findById(int seatClassId) {
-		String sql = "SELECT * FROM Seat_Class WHERE Seat_Class_ID = ?";
+		String sql = "SELECT * FROM seat_class WHERE Seat_Class_ID = ?";
 		return jdbcTemplate.queryForObject(sql, new SeatClassRowMapper(), seatClassId);
 	}
 
 	@Override
 	public List<SeatClass> findAll() {
-		String sql = "SELECT * FROM Seat_Class";
+		String sql = "SELECT * FROM seat_class";
 		return jdbcTemplate.query(sql, new SeatClassRowMapper());
 	}
 
 	@Override
 	public void save(SeatClass seatClass) {
-		String sql = "INSERT INTO Seat_Class (class_name, price) VALUES (?, ?)";
+		String sql = "INSERT INTO seat_class (class_name, price) VALUES (?, ?)";
 		jdbcTemplate.update(sql, seatClass.getName(), seatClass.getPrice());
 	}
 
 	@Override
 	public void updatePrice(int seatClassId, double newPrice) {
-		String sql = "UPDATE Seat_Class SET price = ? WHERE seat_class_id = ?";
+		String sql = "UPDATE seat_class SET price = ? WHERE seat_class_id = ?";
 		jdbcTemplate.update(sql, newPrice, seatClassId);
 	}
 
@@ -66,7 +66,7 @@ public class SeatClassRepositoryImpl implements SeatClassRepository {
 
 	@Override
 	public List<SeatClass> findByFlightIdWithAvailableSeats(int flightId) {
-		String sql = "SELECT sc.* FROM seat_class sc " + "JOIN flight_Seats fs ON sc.Seat_Class_ID = fs.Seat_Class_ID "
+		String sql = "SELECT sc.* FROM seat_class sc " + "JOIN flight_seats fs ON sc.Seat_Class_ID = fs.Seat_Class_ID "
 				+ "WHERE fs.Flight_ID = ? AND fs.Available_Seats > 0 " + "GROUP BY sc.Seat_Class_ID"; // Use GROUP BY to
 																										// avoid
 																										// duplicates if
@@ -80,7 +80,7 @@ public class SeatClassRepositoryImpl implements SeatClassRepository {
 
 	@Override
 	public Integer getAvailableSeatsForFlightSeatClass(int flightId, Integer SeatClassId) {
-		String sql = "SELECT Available_Seats FROM Flight_Seats WHERE Flight_ID = ? AND Seat_Class_ID = ?";
+		String sql = "SELECT Available_Seats FROM flight_seats WHERE Flight_ID = ? AND Seat_Class_ID = ?";
 		try {
 			return jdbcTemplate.queryForObject(sql, Integer.class, flightId, SeatClassId);
 		} catch (EmptyResultDataAccessException e) {

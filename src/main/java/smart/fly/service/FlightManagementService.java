@@ -250,7 +250,7 @@ public class FlightManagementService {
 			KeyHolder keyHolder = new GeneratedKeyHolder();
 			int flightInsertResult = jdbcTemplate.update(connection -> {
 				PreparedStatement ps = connection.prepareStatement(
-						"INSERT INTO Flight (flight_number, Airline_Id, Departure_Airport_Id, Arrival_Airport_Id, "
+						"INSERT INTO flight (flight_number, Airline_Id, Departure_Airport_Id, Arrival_Airport_Id, "
 								+ "Departure_Date_Time, Arrival_Date_Time, Status, fm_id) "
 								+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
 						Statement.RETURN_GENERATED_KEYS);

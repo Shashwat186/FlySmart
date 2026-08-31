@@ -31,7 +31,7 @@ public class FeedbackRepositoryImpl implements FeedbackRepository {
 
 	@Override
 	public boolean addFeedback(Feedback feedback) {
-		String sql = "INSERT INTO Feedback (User_ID, Booking_ID, Feedback_Date_Time, Rating, Feedback_Content, status) "
+		String sql = "INSERT INTO feedback (User_ID, Booking_ID, Feedback_Date_Time, Rating, Feedback_Content, status) "
 				+ "VALUES (?, ?, ?, ?, ?, ?)";
 		int rowsAffected = jdbcTemplate.update(sql, feedback.getUserId(), feedback.getBookingId(),
 				feedback.getFeedbackDateTime(), feedback.getRating(), feedback.getFeedbackContent(),
@@ -41,7 +41,7 @@ public class FeedbackRepositoryImpl implements FeedbackRepository {
 
 	@Override
 	public boolean checkFeedbackExists(int userId, int bookingId) {
-		String sql = "SELECT COUNT(*) FROM Feedback WHERE User_ID = ? AND Booking_ID = ?";
+		String sql = "SELECT COUNT(*) FROM feedback WHERE User_ID = ? AND Booking_ID = ?";
 		Integer count = jdbcTemplate.queryForObject(sql, Integer.class, userId, bookingId);
 		return count != null && count > 0;
 	}
@@ -69,7 +69,7 @@ public class FeedbackRepositoryImpl implements FeedbackRepository {
 
 	@Override
 	public List<Integer> getBookingsWithFeedback(int userId) {
-		String sql = "SELECT Booking_ID FROM Feedback WHERE User_ID = ?";
+		String sql = "SELECT Booking_ID FROM feedback WHERE User_ID = ?";
 		return jdbcTemplate.queryForList(sql, Integer.class, userId);
 	}
 
@@ -143,7 +143,7 @@ public class FeedbackRepositoryImpl implements FeedbackRepository {
 
 	@Override
 	public List<Feedback> getFeedbacksByUser(int userId) {
-		String sql = "SELECT * FROM Feedback WHERE User_ID = ?";
+		String sql = "SELECT * FROM feedback WHERE User_ID = ?";
 		return jdbcTemplate.query(sql, new FeedbackRowMapper(), userId);
 	}
 }

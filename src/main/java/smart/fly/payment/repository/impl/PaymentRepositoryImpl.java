@@ -25,7 +25,7 @@ public class PaymentRepositoryImpl implements PaymentRepository {
 
 	@Override
 	public void save(Payment payment) {
-		String sql = "INSERT INTO Payment (booking_id, card_number, card_holder_name, "
+		String sql = "INSERT INTO payment (booking_id, card_number, card_holder_name, "
 				+ "expiry_date, payment_date_time, payment_mode, transaction_id, upi_id, card_type) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, payment.getBooking().getBookingId(), payment.getCardNumber(),
@@ -35,19 +35,19 @@ public class PaymentRepositoryImpl implements PaymentRepository {
 
 	@Override
 	public Payment findByBooking(int bookingId) {
-		String sql = "SELECT * FROM Payment WHERE booking_id = ?";
+		String sql = "SELECT * FROM payment WHERE booking_id = ?";
 		return jdbcTemplate.queryForObject(sql, new PaymentRowMapper(), bookingId);
 	}
 
 	@Override
 	public List<Payment> findByTransactionId(String transactionId) {
-		String sql = "SELECT * FROM Payment WHERE transaction_id = ?";
+		String sql = "SELECT * FROM payment WHERE transaction_id = ?";
 		return jdbcTemplate.query(sql, new PaymentRowMapper(), transactionId);
 	}
 
 	@Override
 	public void updatePaymentStatus(int paymentId, String status) {
-		String sql = "UPDATE Payment SET status = ? WHERE payment_id = ?";
+		String sql = "UPDATE payment SET status = ? WHERE payment_id = ?";
 		jdbcTemplate.update(sql, status, paymentId);
 	}
 

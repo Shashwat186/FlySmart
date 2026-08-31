@@ -29,7 +29,7 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public User findByEmail(String email) {
-		String sql = "SELECT * FROM User WHERE email = ?";
+		String sql = "SELECT * FROM user WHERE email = ?";
 		try {
 			return jdbcTemplate.queryForObject(sql, new UserRowMapper(), email);
 		} catch (Exception e) {
@@ -39,13 +39,13 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public User findById(int userId) {
-		String sql = "SELECT * FROM User WHERE user_id = ?";
+		String sql = "SELECT * FROM user WHERE user_id = ?";
 		return jdbcTemplate.queryForObject(sql, new UserRowMapper(), userId);
 	}
 
 	@Override
 	public User save(User user) {
-		String sql = "INSERT INTO User (name, email, phone, Role, Gender, dob, password_hash, password_salt,profile_photo) "
+		String sql = "INSERT INTO user (name, email, phone, Role, Gender, dob, password_hash, password_salt,profile_photo) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -75,45 +75,45 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public void update(User user) {
-		String sql = "UPDATE User SET name = ?, phone = ?, gender = ?, dob = ? WHERE user_id = ?";
+		String sql = "UPDATE user SET name = ?, phone = ?, gender = ?, dob = ? WHERE user_id = ?";
 		jdbcTemplate.update(sql, user.getName(), user.getPhone(), user.getGender(),
 				new java.sql.Date(user.getDob().getTime()), user.getUserId());
 	}
 
 	@Override
 	public void delete(int userId) {
-		String sql = "DELETE FROM User WHERE user_id = ?";
+		String sql = "DELETE FROM user WHERE user_id = ?";
 		jdbcTemplate.update(sql, userId);
 	}
 
 	@Override
 	public void changePassword(int userId, String newPasswordHash, String newSalt) {
-		String sql = "UPDATE User SET password_hash = ?, password_salt = ? WHERE user_id = ?";
+		String sql = "UPDATE user SET password_hash = ?, password_salt = ? WHERE user_id = ?";
 		jdbcTemplate.update(sql, newPasswordHash, newSalt, userId);
 	}
 
 	@Override
 	public boolean emailExists(String email) {
-		String sql = "SELECT COUNT(*) FROM User WHERE email = ?";
+		String sql = "SELECT COUNT(*) FROM user WHERE email = ?";
 		int count = jdbcTemplate.queryForObject(sql, Integer.class, email);
 		return count > 0;
 	}
 
 	@Override
 	public List<User> findAllByRole(String role) {
-		String sql = "SELECT * FROM User WHERE role = ?";
+		String sql = "SELECT * FROM user WHERE role = ?";
 		return jdbcTemplate.query(sql, new UserRowMapper(), role);
 	}
 
 	@Override
 	public int countByRole(String role) {
-		String sql = "SELECT COUNT(*) FROM User WHERE role = ?";
+		String sql = "SELECT COUNT(*) FROM user WHERE role = ?";
 		return jdbcTemplate.queryForObject(sql, Integer.class, role);
 	}
 
 	@Override
 	public void updateProfilePhoto(int userId, byte[] profilePhoto) {
-		String sql = "UPDATE User SET profile_photo = ? WHERE user_id = ?";
+		String sql = "UPDATE user SET profile_photo = ? WHERE user_id = ?";
 		jdbcTemplate.update(sql, profilePhoto, userId);
 	}
 

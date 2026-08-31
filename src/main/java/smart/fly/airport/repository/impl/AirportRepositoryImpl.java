@@ -24,44 +24,44 @@ public class AirportRepositoryImpl implements AirportRepository {
 
 	@Override
 	public Airport findById(int airportId) {
-		String sql = "SELECT * FROM Airport WHERE airport_id = ?";
+		String sql = "SELECT * FROM airport WHERE airport_id = ?";
 		return jdbcTemplate.queryForObject(sql, new AirportRowMapper(), airportId);
 	}
 
 	@Override
 	public Airport findByCode(String code) {
-		String sql = "SELECT * FROM Airport WHERE code = ?";
+		String sql = "SELECT * FROM airport WHERE code = ?";
 		return jdbcTemplate.queryForObject(sql, new AirportRowMapper(), code);
 	}
 
 	@Override
 	public List<Airport> findAll() {
-		String sql = "SELECT * FROM Airport ORDER BY name";
+		String sql = "SELECT * FROM airport ORDER BY name";
 		return jdbcTemplate.query(sql, new AirportRowMapper());
 	}
 
 	@Override
 	public List<Airport> findByLocation(String location) {
-		String sql = "SELECT * FROM Airport WHERE location LIKE ?";
+		String sql = "SELECT * FROM airport WHERE location LIKE ?";
 		return jdbcTemplate.query(sql, new AirportRowMapper(), "%" + location + "%");
 	}
 
 	@Override
 	public void save(Airport airport) {
-		String sql = "INSERT INTO Airport (name, code, contact_info, location) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO airport (name, code, contact_info, location) VALUES (?, ?, ?, ?)";
 		jdbcTemplate.update(sql, airport.getName(), airport.getCode(), airport.getContactInfo(), airport.getLocation());
 	}
 
 	@Override
 	public void update(Airport airport) {
-		String sql = "UPDATE Airport SET name = ?, code = ?, contact_info = ?, location = ? WHERE airport_id = ?";
+		String sql = "UPDATE airport SET name = ?, code = ?, contact_info = ?, location = ? WHERE airport_id = ?";
 		jdbcTemplate.update(sql, airport.getName(), airport.getCode(), airport.getContactInfo(), airport.getLocation(),
 				airport.getAirportId());
 	}
 
 	@Override
 	public void delete(int airportId) {
-		String sql = "DELETE FROM Airport WHERE airport_id = ?";
+		String sql = "DELETE FROM airport WHERE airport_id = ?";
 		jdbcTemplate.update(sql, airportId);
 	}
 
@@ -86,7 +86,7 @@ public class AirportRepositoryImpl implements AirportRepository {
 
 	@Override
 	public List<Airport> findAllForSearch() {
-		String sql = "SELECT Airport_ID, name, code, location FROM Airport ORDER BY name";
+		String sql = "SELECT Airport_ID, name, code, location FROM airport ORDER BY name";
 		return jdbcTemplate.query(sql, new AirportSearchRowMapper());
 	}
 

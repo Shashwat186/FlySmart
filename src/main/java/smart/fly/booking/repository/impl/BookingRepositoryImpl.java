@@ -32,25 +32,25 @@ public class BookingRepositoryImpl implements BookingRepository {
 
 	@Override
 	public Booking findById(int bookingId) {
-		String sql = "SELECT * FROM Booking WHERE booking_id = ?";
+		String sql = "SELECT * FROM booking WHERE booking_id = ?";
 		return jdbcTemplate.queryForObject(sql, new BookingRowMapper(), bookingId);
 	}
 
 	@Override
 	public List<Booking> findByPassenger(int passengerId) {
-		String sql = "SELECT * FROM Booking WHERE passenger_id = ? ORDER BY booking_date_time DESC";
+		String sql = "SELECT * FROM booking WHERE passenger_id = ? ORDER BY booking_date_time DESC";
 		return jdbcTemplate.query(sql, new BookingRowMapper(), passengerId);
 	}
 
 	@Override
 	public List<Booking> findByFlight(int flightId) {
-		String sql = "SELECT * FROM Booking WHERE flight_id = ? ORDER BY booking_date_time DESC";
+		String sql = "SELECT * FROM booking WHERE flight_id = ? ORDER BY booking_date_time DESC";
 		return jdbcTemplate.query(sql, new BookingRowMapper(), flightId);
 	}
 
 	@Override
 	public void save(Booking booking) {
-		String sql = "INSERT INTO Booking (passenger_id, flight_id, seat_class_id, "
+		String sql = "INSERT INTO booking (passenger_id, flight_id, seat_class_id, "
 				+ "booking_date_time, number_of_seats, total_price) " + "VALUES (?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, booking.getPassenger().getPassengerId(), booking.getFlight().getFlightId(),
 				booking.getSeatClass().getSeatClassId(), booking.getBookingDateTime(), booking.getNumberOfSeats(),
@@ -59,13 +59,13 @@ public class BookingRepositoryImpl implements BookingRepository {
 
 	@Override
 	public void cancel(int bookingId) {
-		String sql = "DELETE FROM Booking WHERE booking_id = ?";
+		String sql = "DELETE FROM booking WHERE booking_id = ?";
 		jdbcTemplate.update(sql, bookingId);
 	}
 
 	@Override
 	public void updateSeats(int bookingId, int newSeatCount) {
-		String sql = "UPDATE Booking SET number_of_seats = ? WHERE booking_id = ?";
+		String sql = "UPDATE booking SET number_of_seats = ? WHERE booking_id = ?";
 		jdbcTemplate.update(sql, newSeatCount, bookingId);
 	}
 

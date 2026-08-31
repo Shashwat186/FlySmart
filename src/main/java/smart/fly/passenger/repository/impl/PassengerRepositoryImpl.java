@@ -26,19 +26,19 @@ public class PassengerRepositoryImpl implements PassengerRepository {
 
 	@Override
 	public Passenger findById(int passengerId) {
-		String sql = "SELECT * FROM Passenger WHERE passenger_id = ?";
+		String sql = "SELECT * FROM passenger WHERE passenger_id = ?";
 		return jdbcTemplate.queryForObject(sql, new PassengerRowMapper(), passengerId);
 	}
 
 	@Override
 	public Passenger findByEmail(String email) {
-		String sql = "SELECT * FROM Passenger WHERE email = ?";
+		String sql = "SELECT * FROM passenger WHERE email = ?";
 		return jdbcTemplate.queryForObject(sql, new PassengerRowMapper(), email);
 	}
 
 	@Override
 	public Passenger findByPhone(String phone) {
-		String sql = "SELECT * FROM Passenger WHERE phone = ?";
+		String sql = "SELECT * FROM passenger WHERE phone = ?";
 		return jdbcTemplate.queryForObject(sql, new PassengerRowMapper(), phone);
 	}
 
@@ -54,7 +54,7 @@ public class PassengerRepositoryImpl implements PassengerRepository {
 
 	@Override
 	public void save(Passenger passenger) {
-		String sql = "INSERT INTO Passenger (name, email, phone, loyalty_points, is_registered, user_id) "
+		String sql = "INSERT INTO passenger (name, email, phone, loyalty_points, is_registered, user_id) "
 				+ "VALUES (?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, passenger.getName(), passenger.getEmail(), passenger.getPhone(),
 				passenger.getLoyaltyPoints(), passenger.isRegistered(), 
@@ -63,7 +63,7 @@ public class PassengerRepositoryImpl implements PassengerRepository {
 
 	@Override
 	public void update(Passenger passenger) {
-		String sql = "UPDATE Passenger SET name = ?, email = ?, phone = ?, loyalty_points = ?, "
+		String sql = "UPDATE passenger SET name = ?, email = ?, phone = ?, loyalty_points = ?, "
 				+ "is_registered = ?, user_id = ? WHERE passenger_id = ?";
 		jdbcTemplate.update(sql, passenger.getName(), passenger.getEmail(), passenger.getPhone(),
 				passenger.getLoyaltyPoints(), passenger.isRegistered(), 
@@ -72,13 +72,13 @@ public class PassengerRepositoryImpl implements PassengerRepository {
 
 	@Override
 	public void linkToUser(int passengerId, int userId) {
-		String sql = "UPDATE Passenger SET user_id = ?, is_registered = TRUE WHERE passenger_id = ?";
+		String sql = "UPDATE passenger SET user_id = ?, is_registered = TRUE WHERE passenger_id = ?";
 		jdbcTemplate.update(sql, userId, passengerId);
 	}
 
 	@Override
 	public List<Passenger> findUnregisteredPassengers() {
-		String sql = "SELECT * FROM Passenger WHERE is_registered = FALSE";
+		String sql = "SELECT * FROM passenger WHERE is_registered = FALSE";
 		return jdbcTemplate.query(sql, new PassengerRowMapper());
 	}
 
@@ -97,7 +97,7 @@ public class PassengerRepositoryImpl implements PassengerRepository {
 
 	@Override
 	public int countRegisteredPassengers() {
-		String sql = "SELECT COUNT(DISTINCT name) FROM Passenger WHERE is_registered=1";
+		String sql = "SELECT COUNT(DISTINCT name) FROM passenger WHERE is_registered=1";
 		return jdbcTemplate.queryForObject(sql, Integer.class);
 	}
 

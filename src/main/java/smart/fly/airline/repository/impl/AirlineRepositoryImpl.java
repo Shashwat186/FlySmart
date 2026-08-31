@@ -24,38 +24,38 @@ public class AirlineRepositoryImpl implements AirlineRepository {
 
 	@Override
 	public Airline findById(int airlineId) {
-		String sql = "SELECT * FROM Airline WHERE airline_id = ?";
+		String sql = "SELECT * FROM airline WHERE airline_id = ?";
 		return jdbcTemplate.queryForObject(sql, new AirlineRowMapper(), airlineId);
 	}
 
 	@Override
 	public Airline findByCode(String code) {
-		String sql = "SELECT * FROM Airline WHERE code = ?";
+		String sql = "SELECT * FROM airline WHERE code = ?";
 		return jdbcTemplate.queryForObject(sql, new AirlineRowMapper(), code);
 	}
 
 	@Override
 	public List<Airline> findAll() {
-		String sql = "SELECT * FROM Airline ORDER BY name";
+		String sql = "SELECT * FROM airline ORDER BY name";
 		return jdbcTemplate.query(sql, new AirlineRowMapper());
 	}
 
 	@Override
 	public void save(Airline airline) {
-		String sql = "INSERT INTO Airline (name, code, contact_info) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO airline (name, code, contact_info) VALUES (?, ?, ?)";
 		jdbcTemplate.update(sql, airline.getName(), airline.getCode(), airline.getContactInfo());
 	}
 
 	@Override
 	public void update(Airline airline) {
-		String sql = "UPDATE Airline SET name = ?, code = ?, contact_info = ? WHERE airline_id = ?";
+		String sql = "UPDATE airline SET name = ?, code = ?, contact_info = ? WHERE airline_id = ?";
 		jdbcTemplate.update(sql, airline.getName(), airline.getCode(), airline.getContactInfo(),
 				airline.getAirlineId());
 	}
 
 	@Override
 	public void delete(int airlineId) {
-		String sql = "DELETE FROM Airline WHERE airline_id = ?";
+		String sql = "DELETE FROM airline WHERE airline_id = ?";
 		jdbcTemplate.update(sql, airlineId);
 	}
 

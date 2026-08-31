@@ -86,7 +86,7 @@ public class FlightRepositoryImpl implements FlightRepository {
 
 	@Override
 	public void save(Flight flight) {
-		String sql = "INSERT INTO Flight (flight_number, Airline_Id, Departure_Airport_Id, "
+		String sql = "INSERT INTO flight (flight_number, Airline_Id, Departure_Airport_Id, "
 				+ "Arrival_Airport_Id, Departure_Date_Time, Arrival_Date_Time, Status, fm_id) "
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, flight.getFlightNumber(), flight.getAirline().getAirlineId(),
@@ -134,7 +134,7 @@ public class FlightRepositoryImpl implements FlightRepository {
 
 	@Override
 	public void updateStatus(int flightId, String status) {
-		String sql = "UPDATE Flight SET status = ? WHERE flight_id = ?";
+		String sql = "UPDATE flight SET status = ? WHERE flight_id = ?";
 		jdbcTemplate.update(sql, status, flightId);
 	}
 
