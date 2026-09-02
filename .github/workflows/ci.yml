@@ -14,10 +14,7 @@ jobs:
     name: Build and test
     runs-on: ubuntu-latest
     env:
-      # Repository secrets: Settings > Secrets and variables > Actions > Secrets
-      DB_URL: ${{ secrets.DB_URL }}
-      DB_USERNAME: ${{ secrets.DB_USERNAME }}
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      SPRING_PROFILES_ACTIVE: test
 
     steps:
       - name: Check out source
