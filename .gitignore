@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Local environment files may contain database credentials.
+.env
+.env.*
+!.env.example
