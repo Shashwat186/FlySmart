@@ -14,9 +14,8 @@ jobs:
     name: Build and test
     runs-on: ubuntu-latest
     env:
-      # Repository variable: Settings > Secrets and variables > Actions > Variables
-      DB_URL: ${{ vars.DB_URL }}
       # Repository secrets: Settings > Secrets and variables > Actions > Secrets
+      DB_URL: ${{ secrets.DB_URL }}
       DB_USERNAME: ${{ secrets.DB_USERNAME }}
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
 
